@@ -2,8 +2,8 @@ import cv2
 import numpy as np
 
 # Model path
-model_path = "mobilenet_iter_73000.caffemodel"
-prototxt_path = "deploy.prototxt"
+model_path = "./model/mobilenet_iter_73000.caffemodel"
+prototxt_path = "./model/deploy.prototxt"
 
 # Loading the MobileNet (SSD) model
 net = cv2.dnn.readNetFromCaffe(prototxt_path, model_path)
@@ -53,7 +53,8 @@ rtsp_url = f"rtsp://{user}:{password}@{local_ip_address}:{port}/{resource}"
 http_url = f"http://{router_ip_address}:{port}"
 
 # Creating the capture using rtsp ptorcol and FFMPEG decoder
-cap = cv2.VideoCapture(rtsp_url, cv2.CAP_FFMPEG)
+# cap = cv2.VideoCapture(rtsp_url, cv2.CAP_FFMPEG)
+cap = cv2.VideoCapture(0)
 
 # Main loop
 while True:
@@ -61,7 +62,8 @@ while True:
     if not cap.isOpened():
         print("Não foi possível abrir o stream RTSP.")
         # Creating the capture using rtsp ptorcol and FFMPEG decoder
-        cap = cv2.VideoCapture(rtsp_url, cv2.CAP_FFMPEG)
+        # cap = cv2.VideoCapture(rtsp_url, cv2.CAP_FFMPEG)
+        cap = cv2.VideoCapture(0)
 
     else:
         # Starting capture

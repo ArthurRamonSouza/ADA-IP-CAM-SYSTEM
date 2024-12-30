@@ -2,11 +2,12 @@ import numpy as np
 from scipy.spatial import distance
 
 class CentroidTracker:
-    def __init__(self, max_disappeared=50):
+    def __init__(self, max_disappeared=40, max_distance=50):
         self.next_object_id = 0
         self.objects = {}
         self.disappeared = {}
         self.max_disappeared = max_disappeared
+        self.max_distance = max_distance
 
     def register(self, centroid):
         self.objects[self.next_object_id] = centroid
@@ -62,7 +63,7 @@ class CentroidTracker:
                     continue
 
                 # If the distance is too large, skip the pair
-                if D[row, col] > self.max_disappeared:
+                if D[row, col] > self.max_distance:
                     continue
 
                 # Update the centroid for the matched object

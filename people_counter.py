@@ -29,7 +29,7 @@ help="path to optional input video file")
 ap.add_argument("-o", "--output", type=str,
 help="path to optional output video file")
 
-ap.add_argument("-c", "--confidence", type=float, default=0.4,
+ap.add_argument("-c", "--confidence", type=float, default=0.1,
 help="minimum probability to filter weak detections")
 
 ap.add_argument("-s", "--skip-frames", type=int, default=30,
@@ -46,8 +46,18 @@ print(f"Confidence Threshold: {args['confidence']}")
 print(f"Skip Frames: {args['skip_frames']}")
 
 # Model path
-model_path = "./model/mobilenet_iter_73000.caffemodel"
-prototxt_path = "./model/deploy.prototxt"
+# model_path = "./model/mobilenet_iter_73000.caffemodel"
+# prototxt_path = "./model/deploy.prototxt"
+
+# model_path = "./model/MobileNetSSD_deploy.caffemodel"
+# prototxt_path = "./model/MobileNetSSD_deploy.prototxt"
+
+# model_path = "./model/SSD_MobileNet.caffemodel"
+# prototxt_path = "./model/SSD_MobileNet_prototxt.txt"
+
+
+model_path = "./model/MobileNetSSD_deploy_2.caffemodel"
+prototxt_path = "./model/MobileNetSSD_deploy_2.prototxt"
 
 # Initing the model
 print("[INFO] Loading the model...")
@@ -145,7 +155,6 @@ while True:
         # The values 127.5 and 0.007843 are chosen because they were used during
         # the training phase of models like MobileNet or SSD (Single Shot Detector)
         frame_resized = resize_with_padding(frame, (300, 300))
-        print(frame_resized.shape[:2])
         blob = cv2.dnn.blobFromImage(frame_resized, 0.007843, (300, 300), 127.5)
         model.net.setInput(blob)
         # Propagates the input data through all the layers of the network
@@ -164,7 +173,7 @@ while True:
 
             if confidence > args["confidence"]:
                 idx = int(detections[0, 0, p, 1])
-
+                
                 if model.CLASSES[idx] != "person":
                     continue
                 # In the detections tensor are usually in a normalized format
@@ -175,6 +184,7 @@ while True:
                 # and then start the dlib correlation tracker
                 tracker = dlib.correlation_tracker()
                 rect = dlib.rectangle(start_x, start_y, end_x, end_y)
+                cv2.rectangle(frame, (start_x, start_y), (end_x, end_y), 1, 2)
                 tracker.start_track(rgb, rect)
 				# Add the tracker to the trackers list 
                 trackers.append(tracker)
@@ -191,13 +201,14 @@ while True:
             pos = tracker.get_position()
 
             # Unpack the position object
-            startX = int(pos.left())
-            startY = int(pos.top())
-            endX = int(pos.right())
-            endY = int(pos.bottom())
+            start_x = int(pos.left())
+            start_y = int(pos.top())
+            end_x = int(pos.right())
+            end_y = int(pos.bottom())
 
             # Add the bounding box coordinates to the rectangles list
-            rects.append((startX, startY, endX, endY))
+            rects.append((start_x, start_y, end_x, end_y))
+            cv2.rectangle(frame, (start_x, start_y), (end_x, end_y), 1, 2)
     
     # Drawnig the line and the counters
     cv2.line(frame, (W, 0), (W, H), (0, 0, 255), 2)
@@ -251,7 +262,7 @@ while True:
           ("Entrances", entrances),
           ("Exits", exits),
           ("Status", status),
-	]
+          ]
 
 	# loop over the info tuples and draw them on our frame
     for (i, (k, v)) in enumerate(info):

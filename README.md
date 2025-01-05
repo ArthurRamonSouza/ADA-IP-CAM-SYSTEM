@@ -6,6 +6,10 @@
 
 [Object detection with deep learning and OpenCV](https://pyimagesearch.com/2017/09/11/object-detection-with-deep-learning-and-opencv/)
 
+## Papers:
+
+[MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications](https://arxiv.org/pdf/1704.04861)
+[SSD: Single Shot MultiBox Detector](https://arxiv.org/pdf/1512.02325)
 ## DNN Models:
 
 [First Mobilenet SSD try](https://github.com/chuanqi305/MobileNet-SSD)

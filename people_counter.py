@@ -85,7 +85,7 @@ HALF_WIDITH = None
 # Instantiate the centroid tracker, then initialize a list to store
 # each of our dlib correlation trackers, followed by a dictionary to
 # map each unique object ID to a TrackableObject
-ct = CentroidTracker(max_disappeared=40, max_distance=50)
+ct: CentroidTracker = CentroidTracker(max_disappeared=40, max_distance=50)
 trackers = []
 trackableObjects = {}
 
@@ -196,7 +196,6 @@ while True:
 
     # Only use the trackers objects to keep the people trackable
     else:
-
         for tracker in trackers:
             # Set system status to 'tracking'
             status = "Tracking"
@@ -229,11 +228,11 @@ while True:
     for (objectID, centroid) in objects.items():
 
         # Finding the trackable objects by they IDs
-        to = trackableObjects.get(objectID, None)
+        to: TrackableObject = trackableObjects.get(objectID, None)
 
         # If there isn't, create a new object
         if to is None:
-            to = TrackableObject(objectID, centroid)
+            to: TrackableObject = TrackableObject(objectID, centroid)
 
         else:
 
@@ -242,16 +241,16 @@ while True:
             last_x = to.centroids[-1][0]
             to.centroids.append(centroid)
 
-            if not to.counted:
+            if not to.is_counted():
                 # Mooving to the right
                 if last_x < HALF_WIDITH <= centroid[0]:
                     entrances+=1
-                    to.counted = True
+                    to.mark_counted()
                 
                 # Mooving to the left
                 elif last_x >= HALF_WIDITH > centroid[0]:
                     exits+=1
-                    to.counted = True
+                    to.mark_counted()
 
 		# Store the trackable object in the dictionary
         trackableObjects[objectID] = to

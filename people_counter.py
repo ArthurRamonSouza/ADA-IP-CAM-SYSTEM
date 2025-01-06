@@ -1,4 +1,5 @@
 # python3 people_counter.py -p ./model/deploy.prototxt -m ./model/mobilenet_iter_73000.caffemodel -o ./output/output_01.avi
+# python3 people_counter.py -p ./model/deploy.prototxt -m ./model/mobilenet_iter_73000.caffemodel -i ./input/Many_People.mp4 -o ./output/output_01.avi -c 0 -s 30
 
 from core.centroid_tracker import CentroidTracker
 from core.trackable_object import TrackableObject
@@ -29,7 +30,7 @@ help="path to optional input video file")
 ap.add_argument("-o", "--output", type=str,
 help="path to optional output video file")
 
-ap.add_argument("-c", "--confidence", type=float, default=0.1,
+ap.add_argument("-c", "--confidence", type=float, default=0.7,
 help="minimum probability to filter weak detections")
 
 ap.add_argument("-s", "--skip-frames", type=int, default=30,

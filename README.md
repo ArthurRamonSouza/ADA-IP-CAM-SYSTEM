@@ -1,4 +1,4 @@
-## Supporting content:
+## Supporting Content:
 
 [OpenCV People Counter - PyImageSearch](https://pyimagesearch.com/2018/08/13/opencv-people-counter/)
 
@@ -6,10 +6,13 @@
 
 [Object detection with deep learning and OpenCV](https://pyimagesearch.com/2017/09/11/object-detection-with-deep-learning-and-opencv/)
 
+
 ## Papers:
 
 [MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications](https://arxiv.org/pdf/1704.04861)
 [SSD: Single Shot MultiBox Detector](https://arxiv.org/pdf/1512.02325)
+
+
 ## DNN Models:
 
 [First Mobilenet SSD try](https://github.com/chuanqi305/MobileNet-SSD)
@@ -28,3 +31,7 @@
 
 [MobileNet-SSD-RealSense](https://github.com/PINTO0309/MobileNet-SSD-RealSense/tree/master/caffemodel/MobileNetSSD)
 1. Worked, but need some adjust - MobileNetSSD_deploy_2
+
+## Videos to Test:
+
+[Videezy](https://pt.videezy.com)

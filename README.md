@@ -6,6 +6,8 @@
 
 [Object detection with deep learning and OpenCV](https://pyimagesearch.com/2017/09/11/object-detection-with-deep-learning-and-opencv/)
 
+[Mobilenetv2 takes up 63 MB](https://roboflow.com/model/mobilenet-ssd-v2)
+
 
 ## Papers:
 

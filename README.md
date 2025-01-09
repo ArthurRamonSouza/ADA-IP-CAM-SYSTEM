@@ -10,6 +10,7 @@
 ## Papers:
 
 [MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications](https://arxiv.org/pdf/1704.04861)
+
 [SSD: Single Shot MultiBox Detector](https://arxiv.org/pdf/1512.02325)
 
 
